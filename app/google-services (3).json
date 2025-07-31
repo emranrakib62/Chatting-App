@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "503584344190",
+    "project_id": "alapon-19838",
+    "storage_bucket": "alapon-19838.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503584344190:android:493c4fd1c6416050ca302f",
+        "android_client_info": {
+          "package_name": "com.example.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvUWstmJxvp1i4ejY3FFNL8CyQQVH3FG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
