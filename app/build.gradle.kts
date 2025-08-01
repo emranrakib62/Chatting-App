@@ -58,6 +58,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    val nav_version = ("2.7.0")// Or the latest stable version
+
+    // Kotlin
+    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
 
 
 
