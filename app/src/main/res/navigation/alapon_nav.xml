@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alapon_nav"
+    app:startDestination="@id/signinFragment2">
+
+    <fragment
+        android:id="@+id/signinFragment2"
+        android:name="com.example.chatapp.SigninFragment"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.chatapp.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.example.chatapp.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
