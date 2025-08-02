@@ -3,19 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SigninFragment">
+    tools:context=".SigninFragment"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/images" />
 
-   <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:src="@drawable/images"
-       />
     <TextView
+        android:text="Welcome to Chat World!!"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="15dp" />
 
-        />
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginTop="12dp" />
 
 </LinearLayout>
