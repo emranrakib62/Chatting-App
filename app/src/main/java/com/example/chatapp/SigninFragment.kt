@@ -7,22 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.chatapp.databinding.FragmentSigninBinding
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlin.math.sign
 
 
-class SigninFragment : Fragment() {
+class SignInFragment : Fragment() {
 
     lateinit var binding: FragmentSigninBinding
+    lateinit var mAuth: FirebaseAuth
+    private var firebaseUser: FirebaseUser? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSigninBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
+        FirebaseApp.initializeApp(requireContext())
+        binding = FragmentSigninBinding.inflate(layoutInflater, container, false)
+
+        mAuth = FirebaseAuth.getInstance()
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        if (firebaseUser != null) {
+            findNavController().navigate(R.id.action_signinFragment_to_homeFragment2)
+        }
 
         binding.btnRegister.setOnClickListener {
-
             findNavController().navigate(R.id.action_signinFragment_to_registerFragment)
         }
 
@@ -31,6 +43,7 @@ class SigninFragment : Fragment() {
             val password = binding.editTextPassword.text.toString()
             signInUser(email, password)
         }
+
         return binding.root
     }
 
@@ -39,5 +52,6 @@ class SigninFragment : Fragment() {
 
 
     }
+
 
 }
