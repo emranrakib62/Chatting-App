@@ -11,6 +11,7 @@ import com.example.chatapp.databinding.FragmentRegisterBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
 
 class RegisterFragment : Fragment() {
@@ -19,6 +20,7 @@ class RegisterFragment : Fragment() {
     lateinit var mAuth: FirebaseAuth
     lateinit var firebaseUser: FirebaseUser
     lateinit var userId: String
+    lateinit var myRef: DatabaseReference
 
 
     override fun onCreateView(
