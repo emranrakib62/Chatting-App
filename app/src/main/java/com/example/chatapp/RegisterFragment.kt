@@ -50,7 +50,7 @@ mAuth.createUserWithEmailAndPassword(email,password)
        if(it.isSuccessful){
            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
        }else{
-           Toast.makeText(requireContext(),"", Toast.LENGTH_LONG).show()
+           Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
        }
     }
 
