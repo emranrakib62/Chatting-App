@@ -64,12 +64,26 @@ class RegisterFragment : Fragment() {
 mAuth.createUserWithEmailAndPassword(email,password)
     .addOnCompleteListener{
        if(it.isSuccessful){
+           firebaseUser= FirebaseAuth.getInstance().currentUser!!
+           userId=firebaseUser.uid
+           val map=mapOf("name" to name,"email" to email,"phone" to phone,"password" to password,"address" to address)
+
+
+           if(userId!=null){
+               myRef.child(userId).setValue(map).addOnCompleteListener {
+
+            if(it.isSuccessful){
            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+
+            }else{
+           Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
+       }
+    }
+           }
        }else{
            Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
        }
     }
-
 
     }
 }
