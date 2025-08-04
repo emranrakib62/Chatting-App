@@ -40,8 +40,8 @@ class SignInFragment : Fragment() {
         }
 
         binding.btnSignIn.setOnClickListener {
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
+            val email = binding.editTextEmail.text.toString().trim()
+            val password = binding.editTextPassword.text.toString().trim()
             signInUser(email, password)
         }
 

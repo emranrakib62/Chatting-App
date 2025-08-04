@@ -21,8 +21,8 @@ lateinit var mAuth: FirebaseAuth
     ): View? {
         binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    mAuth= FirebaseAuth.getInstance()
+
+        mAuth= FirebaseAuth.getInstance()
 
         binding.btnLogout.setOnClickListener {
             mAuth.signOut()
@@ -33,4 +33,6 @@ lateinit var mAuth: FirebaseAuth
 
 
 }
+
+
 

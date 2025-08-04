@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
 
         val database= Firebase.database
-        myRef = database.reference.child("user")
+        myRef = database.reference
 
         binding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_signinFragment)
@@ -54,14 +54,9 @@ class RegisterFragment : Fragment() {
     }
 
 
-    private fun registerUser(
-        email: String,
-        password: String,
-        name: String,
-        phone: String,
-        address: String
-    ) {
-mAuth.createUserWithEmailAndPassword(email,password)
+    private fun registerUser(email: String, password: String, name: String, phone: String, address: String) {
+
+        mAuth.createUserWithEmailAndPassword(email,password)
     .addOnCompleteListener{
        if(it.isSuccessful){
            firebaseUser= FirebaseAuth.getInstance().currentUser!!
@@ -70,7 +65,7 @@ mAuth.createUserWithEmailAndPassword(email,password)
 
 
            if(userId!=null){
-               myRef.child(userId).setValue(map).addOnCompleteListener {
+               myRef.child("user").child(userId).setValue(map).addOnCompleteListener {
 
             if(it.isSuccessful){
            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
