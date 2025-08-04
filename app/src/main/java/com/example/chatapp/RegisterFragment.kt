@@ -31,7 +31,7 @@ class RegisterFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        val database= Firebase.database()
+        val database= Firebase.database
         myRef = database.reference.child("user")
 
         binding.btnSignIn.setOnClickListener {
