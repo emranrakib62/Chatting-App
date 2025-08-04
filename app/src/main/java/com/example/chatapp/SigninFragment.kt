@@ -25,14 +25,14 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        FirebaseApp.initializeApp(requireContext())
+
         binding = FragmentSigninBinding.inflate(layoutInflater, container, false)
 
         mAuth = FirebaseAuth.getInstance()
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
-            findNavController().navigate(R.id.action_signinFragment_to_homeFragment2)
+            findNavController().navigate(R.id.action_signinFragment_to_homeFragment)
         }
 
         binding.btnRegister.setOnClickListener {
@@ -53,7 +53,7 @@ class SignInFragment : Fragment() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    findNavController().navigate(R.id.action_signinFragment_to_homeFragment2)
+                    findNavController().navigate(R.id.action_signinFragment_to_homeFragment)
                 } else {
                     Toast.makeText(requireContext(), "${it.exception?.message}", Toast.LENGTH_LONG).show()
                 }
