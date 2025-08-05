@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapp.databinding.ItemUserFrBinding
 
-class UserAdapter: ListAdapter<User, UserAdapter.UserViewHolder>(comparator)
+class UserAdapter(var user: UserAdapter.UserListaner): ListAdapter<User, UserAdapter.UserViewHolder>(comparator)
 {
-
+interface  UserListaner{
+    fun moveuser(user:User)
+}
     class  UserViewHolder(var binding: ItemUserFrBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
@@ -26,6 +28,12 @@ class UserAdapter: ListAdapter<User, UserAdapter.UserViewHolder>(comparator)
         getItem(position).let {
             holder.binding.nametv.text=it.name
             holder.binding.mobiletv.text=it.phone
+holder.itemView.setOnClickListener {_->
+user.moveuser(it)
+}
+
+
+
         }
     }
 companion object{

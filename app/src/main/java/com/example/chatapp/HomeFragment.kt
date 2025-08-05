@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), UserAdapter.UserListaner {
 lateinit var binding: FragmentHomeBinding
 lateinit var mAuth: FirebaseAuth
 var userlist=mutableListOf<User>()
@@ -28,7 +28,7 @@ lateinit var  adapter: UserAdapter
 
 
         mAuth= FirebaseAuth.getInstance()
-adapter= UserAdapter()
+        adapter= UserAdapter(this@HomeFragment)
         binding.logoutBtn.setOnClickListener {
             mAuth.signOut()
             findNavController().navigate(R.id.action_homeFragment_to_signinFragment)
@@ -56,6 +56,13 @@ adapter= UserAdapter()
                 TODO("Not yet implemented")
             }
         })
+
+
+    }
+
+    override fun moveuser(user: User) {
+
+
 
 
     }
