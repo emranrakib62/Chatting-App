@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp"
-    android:layout_marginTop="5dp">
-<LinearLayout
-    android:gravity="center"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    app:cardElevation="4dp">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/images"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
-
-<TextView
-    android:layout_marginTop="10dp"
-    android:id="@+id/nametv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:text="name"
-    android:textSize="20dp"
-    />
-
-    <TextView
-        android:layout_marginTop="5dp"
-        android:id="@+id/mobiletv"
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="mobile"
-        android:textSize="20dp"
-        />
+        android:padding="16dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/images"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/nametv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mobiletv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="01765465"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>
