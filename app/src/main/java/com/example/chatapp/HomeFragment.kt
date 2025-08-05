@@ -62,11 +62,12 @@ lateinit var  adapter: UserAdapter
 
     override fun moveuser(user: User) {
 
-findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
 
-var usermail =user.email
+
+var userEmail =user.email
         var bundle = Bundle()
-        bundle.putString("email",usermail)
+        bundle.putString("email",userEmail)
+        findNavController().navigate(R.id.action_homeFragment_to_profileFragment,bundle)
     }
 
 

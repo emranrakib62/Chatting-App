@@ -10,20 +10,17 @@ import com.example.chatapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
-lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-binding= FragmentProfileBinding.inflate(inflater,container,false)
-        var usermail=requireArguments().getString("email")
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        // Inflate the layout for this fragment
-        binding.nametv.text=usermail
+        var userEmail = requireArguments().getString("email")
+        binding.nametv.text = userEmail
 
         return binding.root
     }
-
-
-
 }
