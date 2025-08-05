@@ -43,11 +43,11 @@ adapter= UserAdapter()
 
                 snapshot.children.forEach {
                     var user:User = it.getValue(User::class.java)!!
-userlist.add(user)
+                     userlist.add(user)
 
 
                 }
-adapter.submitList(userlist)
+               adapter.submitList(userlist)
               binding.userRecycler.adapter=adapter
 
             }
