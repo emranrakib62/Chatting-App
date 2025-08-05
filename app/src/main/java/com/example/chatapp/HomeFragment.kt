@@ -40,7 +40,7 @@ lateinit var  adapter: UserAdapter
         super.onViewCreated(view, savedInstanceState)
         FirebaseDatabase.getInstance().reference.child("user").addValueEventListener(object  : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                 userlist.clear()
                 snapshot.children.forEach {
                     var user:User = it.getValue(User::class.java)!!
                      userlist.add(user)
@@ -62,9 +62,11 @@ lateinit var  adapter: UserAdapter
 
     override fun moveuser(user: User) {
 
+findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
 
-
-
+var usermail =user.email
+        var bundle = Bundle()
+        bundle.putString("email",usermail)
     }
 
 
