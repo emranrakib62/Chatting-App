@@ -18,8 +18,12 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        var userEmail = requireArguments().getString("email")
-        binding.nametv.text = userEmail
+        var user = requireArguments().getParcelable<User>("email")!!
+
+
+
+        binding.nametv.text = user.email
+        binding.mobiletv.text=user.phone
 
         return binding.root
     }

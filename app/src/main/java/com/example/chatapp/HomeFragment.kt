@@ -64,9 +64,12 @@ lateinit var  adapter: UserAdapter
 
 
 
-var userEmail =user.email
+//var userEmail =user.email
+
         var bundle = Bundle()
-        bundle.putString("email",userEmail)
+        bundle.putParcelable("email",user)
+
+
         findNavController().navigate(R.id.action_homeFragment_to_profileFragment,bundle)
     }
 
