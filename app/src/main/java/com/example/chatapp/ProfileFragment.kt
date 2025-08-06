@@ -85,7 +85,7 @@ binding.imagepicker.setOnClickListener {
                     // this method is called when all permissions are granted
                     if (multiplePermissionsReport.areAllPermissionsGranted()) {
                         // do you work now
-
+                        pickanImage()
                     }
                     // check for permanent denial of any permission
                     if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
@@ -106,6 +106,21 @@ binding.imagepicker.setOnClickListener {
 
             })
             .onSameThread().check()
+    }
+
+
+    fun pickanImage(){
+
+        ImagePicker.with(this)
+            .crop()
+            .compress(500)
+            .maxResultSize(200, 200)
+            .createIntent { intent ->
+                startForProfileImageResult.launch(intent)
+            }
+
+
+
     }
 
 }
