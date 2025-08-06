@@ -1,12 +1,17 @@
 package com.example.chatapp
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.chatapp.databinding.FragmentProfileBinding
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -18,6 +23,28 @@ import java.util.jar.Manifest
 
 
 class ProfileFragment : Fragment() {
+
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Image Uri will not be null for RESULT_OK
+                val fileUri = data?.data!!
+
+
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+
+            } else {
+
+            }
+        }
+
+
+
+
 
     private lateinit var binding: FragmentProfileBinding
 
@@ -33,34 +60,37 @@ class ProfileFragment : Fragment() {
 
         binding.nametv.text = user.email
         binding.mobiletv.text=user.phone
+binding.imagepicker.setOnClickListener {
+
+
+
+
+}
+
 
         return binding.root
     }
 
     private fun requestPermissions() {
-        // below line is use to request permission in the current activity.
-        // this method is use to handle error in runtime permissions
-        Dexter.withActivity(this) // below line is use to request the number of permissions which are required in our app.
+
+
+        Dexter.withContext(requireActivity())
             .withPermissions(
-                Manifest.permission.CAMERA,  // below is the list of permissions
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_CONTACTS
-            ) // after adding permissions we are calling an with listener method.
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+
+            )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
                     // this method is called when all permissions are granted
                     if (multiplePermissionsReport.areAllPermissionsGranted()) {
                         // do you work now
-                        Toast.makeText(
-                            this@MainActivity,
-                            "All the permissions are granted..",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
                     }
                     // check for permanent denial of any permission
                     if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
-                        // permission is denied permanently, we will show user a dialog message.
-                        showSettingsDialog()
+
+
                     }
                 }
 
@@ -72,10 +102,9 @@ class ProfileFragment : Fragment() {
                     permissionToken.continuePermissionRequest()
                 }
             }).withErrorListener(PermissionRequestErrorListener { error: DexterError? ->
-                // we are displaying a toast message for error message.
-                Toast.makeText(getApplicationContext(), "Error occurred! ", Toast.LENGTH_SHORT)
-                    .show()
-            }) // below line is use to run the permissions on same thread and to check the permissions
+
+
+            })
             .onSameThread().check()
     }
 
