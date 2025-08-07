@@ -49,6 +49,11 @@ class RegisterFragment : Fragment() {
 
         }
 
+
+
+
+
+
         return binding.root
 
     }
@@ -61,7 +66,17 @@ class RegisterFragment : Fragment() {
        if(it.isSuccessful){
            firebaseUser= FirebaseAuth.getInstance().currentUser!!
            userId=firebaseUser.uid
-           val map=mapOf("name" to name,"email" to email,"phone" to phone,"password" to password,"address" to address)
+           val map=mapOf(
+               "name" to name,
+               "email" to email,
+               "phone" to phone,
+               "password" to password,
+               "address" to address,
+               "userId" to firebaseUser.uid,
+               "profileimgurl" to "img"
+
+
+           )
 
 
            if(userId!=null){

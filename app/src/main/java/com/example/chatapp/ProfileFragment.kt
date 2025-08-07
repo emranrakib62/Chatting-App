@@ -2,6 +2,7 @@ package com.example.chatapp
 
 import android.app.Activity
 import android.app.Instrumentation
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +24,8 @@ import java.util.jar.Manifest
 
 
 class ProfileFragment : Fragment() {
-
-
+    lateinit var binding: FragmentProfileBinding
+    private lateinit var fileUri: Uri
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             val resultCode = result.resultCode
@@ -32,7 +33,11 @@ class ProfileFragment : Fragment() {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Image Uri will not be null for RESULT_OK
-                val fileUri = data?.data!!
+                 fileUri = data?.data!!
+
+                binding.profileImage.setImageURI(fileUri)
+                binding.imagepicker.text="Upload"
+
 
 
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
@@ -46,7 +51,7 @@ class ProfileFragment : Fragment() {
 
 
 
-    private lateinit var binding: FragmentProfileBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
