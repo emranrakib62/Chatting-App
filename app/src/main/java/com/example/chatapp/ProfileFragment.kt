@@ -42,7 +42,7 @@ class ProfileFragment : Fragment() {
                  fileUri = data?.data!!
 
                 binding.profileImage.setImageURI(fileUri)
-                binding.imagepicker.text="Upload"
+                binding.imagepicker.text=UPLOAD
 
 
 
@@ -73,11 +73,15 @@ class ProfileFragment : Fragment() {
         binding.mobiletv.text=user.phone
        binding.imagepicker.setOnClickListener {
 
-           if(binding.imagepicker.text=="")
+           if(binding.imagepicker.text==UPLOAD)
+           {
+
+           }else{
+               requestPermissions()
+           }
 
 
 
-    requestPermissions()
 }
 
 
