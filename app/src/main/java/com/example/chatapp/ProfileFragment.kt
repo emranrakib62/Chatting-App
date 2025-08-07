@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
 
-    
+
 
 
     private lateinit var fileUri: Uri
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
             val data = result.data
 
             if (resultCode == Activity.RESULT_OK) {
-                // Image Uri will not be null for RESULT_OK
+
                  fileUri = data?.data!!
 
                 binding.profileImage.setImageURI(fileUri)
@@ -82,6 +82,11 @@ class ProfileFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    companion object{
+        const val USER="user"
+        const val UPLOAD="Upload"
     }
 
     private fun requestPermissions() {
