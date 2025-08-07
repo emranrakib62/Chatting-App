@@ -24,7 +24,13 @@ import java.util.jar.Manifest
 
 
 class ProfileFragment : Fragment() {
+
+
     lateinit var binding: FragmentProfileBinding
+
+    
+
+
     private lateinit var fileUri: Uri
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -65,11 +71,13 @@ class ProfileFragment : Fragment() {
 
         binding.nametv.text = user.email
         binding.mobiletv.text=user.phone
-binding.imagepicker.setOnClickListener {
+       binding.imagepicker.setOnClickListener {
+
+           if(binding.imagepicker.text=="")
 
 
 
-
+    requestPermissions()
 }
 
 
