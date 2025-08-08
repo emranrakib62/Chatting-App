@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.Firebase
@@ -118,7 +119,11 @@ var url: String =it.toString()
 
             )
             val database= Firebase.database
-            firebaseDatabaseReference = database.reference.child("User")
+            firebaseDatabaseReference = database.reference.child("User").child(user.userId)
+        firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {
+            Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
+
+        }
         }
     }
 }
