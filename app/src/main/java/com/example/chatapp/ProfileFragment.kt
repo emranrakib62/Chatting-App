@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.Firebase
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 import com.google.firebase.storage.FirebaseStorage
@@ -31,7 +32,7 @@ import java.util.jar.Manifest
 
 class ProfileFragment : Fragment() {
 
-lateinit var firebaseDatabaseReference: FirebaseDatabase
+lateinit var firebaseDatabaseReference: DatabaseReference
     lateinit var binding: FragmentProfileBinding
 lateinit var firebaseStorage: StorageReference
 lateinit var user: User
@@ -107,9 +108,10 @@ storageReference.putFile(fileUri).addOnCompleteListener {task ->
     if(task.isSuccessful){
         storageReference.downloadUrl.addOnSuccessListener {
 
+var url: String =it.toString()
 
-         var url:String =it.toString()
             val map=mapOf(
+
 
                 "profileimgurl" to url
 
@@ -117,9 +119,6 @@ storageReference.putFile(fileUri).addOnCompleteListener {task ->
             )
             val database= Firebase.database
             firebaseDatabaseReference = database.reference.child("User")
-
-
-
         }
     }
 }
