@@ -31,8 +31,6 @@ class RegisterFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        val database= Firebase.database
-        myRef = database.reference
 
         binding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_signinFragment)
@@ -66,17 +64,7 @@ class RegisterFragment : Fragment() {
        if(it.isSuccessful){
            firebaseUser= FirebaseAuth.getInstance().currentUser!!
            userId=firebaseUser.uid
-           val map=mapOf(
-               "name" to name,
-               "email" to email,
-               "phone" to phone,
-               "password" to password,
-               "address" to address,
-               "userId" to firebaseUser.uid,
-               "profileimgurl" to "img"
 
-
-           )
 
 
            if(userId!=null){

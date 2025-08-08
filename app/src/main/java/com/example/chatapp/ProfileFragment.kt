@@ -14,6 +14,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.Firebase
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.karumi.dexter.Dexter
@@ -28,7 +31,7 @@ import java.util.jar.Manifest
 
 class ProfileFragment : Fragment() {
 
-
+lateinit var firebaseDatabaseReference: FirebaseDatabase
     lateinit var binding: FragmentProfileBinding
 lateinit var firebaseStorage: StorageReference
 lateinit var user: User
@@ -103,7 +106,20 @@ var storageReference: StorageReference=firebaseStorage.child("Profile").child("p
 storageReference.putFile(fileUri).addOnCompleteListener {task ->
     if(task.isSuccessful){
         storageReference.downloadUrl.addOnSuccessListener {
-            Log.i("TAG","startImageUpload:$it")
+
+
+         var url:String =it.toString()
+            val map=mapOf(
+
+                "profileimgurl" to url
+
+
+            )
+            val database= Firebase.database
+            firebaseDatabaseReference = database.reference.child("User")
+
+
+
         }
     }
 }
@@ -134,7 +150,7 @@ storageReference.putFile(fileUri).addOnCompleteListener {task ->
                         // do you work now
                         pickanImage()
                     }
-                    // check for permanent denial of any permission
+
                     if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
 
 
