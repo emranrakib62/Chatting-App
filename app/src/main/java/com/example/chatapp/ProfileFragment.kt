@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Instrumentation
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -27,8 +30,8 @@ class ProfileFragment : Fragment() {
 
 
     lateinit var binding: FragmentProfileBinding
-
-
+lateinit var firebaseStorage: StorageReference
+lateinit var user: User
 
 
     private lateinit var fileUri: Uri
@@ -65,7 +68,11 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        var user = requireArguments().getParcelable<User>("email")!!
+
+        firebaseStorage= FirebaseStorage.getInstance().getReference("Upload")
+
+
+     user = requireArguments().getParcelable<User>("email")!!
 
 
 
@@ -75,6 +82,8 @@ class ProfileFragment : Fragment() {
 
            if(binding.imagepicker.text==UPLOAD)
            {
+
+               startImageUpload()
 
            }else{
                requestPermissions()
@@ -87,6 +96,22 @@ class ProfileFragment : Fragment() {
 
         return binding.root
     }
+
+
+    private fun startImageUpload() {
+var storageReference: StorageReference=firebaseStorage.child("Profile").child("profile-img.${user.userId}")
+storageReference.putFile(fileUri).addOnCompleteListener {task ->
+    if(task.isSuccessful){
+        storageReference.downloadUrl.addOnSuccessListener {
+            Log.i("TAG","startImageUpload:$it")
+        }
+    }
+}
+
+
+    }
+
+
 
     companion object{
         const val USER="user"
@@ -146,3 +171,5 @@ class ProfileFragment : Fragment() {
     }
 
 }
+
+
