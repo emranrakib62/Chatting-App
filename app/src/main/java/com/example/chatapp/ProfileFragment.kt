@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import coil3.load
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.Firebase
