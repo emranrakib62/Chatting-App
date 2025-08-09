@@ -123,6 +123,8 @@ var url: String =it.toString()
         firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {
             Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
+
+            binding.profileImage.load(it)
         }
         }
     }
