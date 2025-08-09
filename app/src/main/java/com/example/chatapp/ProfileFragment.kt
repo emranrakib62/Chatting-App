@@ -120,11 +120,11 @@ var url: String =it.toString()
             )
             val database= Firebase.database
             firebaseDatabaseReference = database.reference.child("User").child(user.userId)
-        firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {
+        firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
             Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
 
-            binding.profileImage.load(it)
+            binding.profileImage.load(profileUrl)
         }
         }
     }
