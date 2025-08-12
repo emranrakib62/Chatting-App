@@ -17,8 +17,12 @@ import coil3.load
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.Firebase
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -77,7 +81,16 @@ lateinit var user: User
         val database= Firebase.database
         firebaseDatabaseReference = database.reference.child("User").child(user.userId)
 
+firebaseDatabaseReference.addValueEventListener(object : ValueEventListener{
+    override fun onDataChange(snapshot: DataSnapshot) {
+        TODO("Not yet implemented")
+    }
 
+    override fun onCancelled(error: DatabaseError) {
+        TODO("Not yet implemented")
+    }
+
+})
         user = requireArguments().getParcelable<User>("email")!!
 
 
