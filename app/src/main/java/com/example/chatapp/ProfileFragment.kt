@@ -73,12 +73,12 @@ lateinit var user: User
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-
         firebaseStorage= FirebaseStorage.getInstance().getReference("Upload")
+        val database= Firebase.database
+        firebaseDatabaseReference = database.reference.child("User").child(user.userId)
 
 
-     user = requireArguments().getParcelable<User>("email")!!
+        user = requireArguments().getParcelable<User>("email")!!
 
 
 
@@ -119,9 +119,10 @@ var url: String =it.toString()
 
 
             )
-            val database= Firebase.database
-            firebaseDatabaseReference = database.reference.child("User").child(user.userId)
-        firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
+
+
+
+            firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
             Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
 

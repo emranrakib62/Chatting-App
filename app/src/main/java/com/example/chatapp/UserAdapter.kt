@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
 import com.example.chatapp.databinding.ItemUserFrBinding
 
 class UserAdapter(var user: UserAdapter.UserListaner): ListAdapter<User, UserAdapter.UserViewHolder>(comparator)
@@ -28,6 +29,7 @@ interface  UserListaner{
         getItem(position).let {
             holder.binding.nametv.text=it.name
             holder.binding.mobiletv.text=it.phone
+            holder.binding.profileImage.load(it.profileimgurl)
 holder.itemView.setOnClickListener {_->
 user.moveuser(it)
 }
