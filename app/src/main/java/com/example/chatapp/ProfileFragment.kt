@@ -73,10 +73,11 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         val database= Firebase.database
         firebaseDatabaseReference = database.reference.child("User").child(user.userId)
+
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         firebaseStorage= FirebaseStorage.getInstance().getReference("Upload")
 
 
