@@ -75,7 +75,8 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-
+        val database= Firebase.database
+        firebaseDatabaseReference = database.reference.child("User").child(user.userId)
         firebaseStorage= FirebaseStorage.getInstance().getReference("Upload")
 
 
@@ -120,8 +121,9 @@ class ProfileFragment : Fragment() {
 
 
                     )
-                    val database= Firebase.database
-                    firebaseDatabaseReference = database.reference.child("User").child(user.userId)
+
+
+
                     firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
                         Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
