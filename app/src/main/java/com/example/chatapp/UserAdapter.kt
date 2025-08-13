@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil3.load
 import com.example.chatapp.databinding.ItemUserFrBinding
 
 class UserAdapter(var user: UserAdapter.UserListaner): ListAdapter<User, UserAdapter.UserViewHolder>(comparator)
 {
-interface  UserListaner{
-    fun moveuser(user:User)
-}
+    interface  UserListaner{
+        fun moveuser(user:User)
+    }
     class  UserViewHolder(var binding: ItemUserFrBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
@@ -29,35 +28,34 @@ interface  UserListaner{
         getItem(position).let {
             holder.binding.nametv.text=it.name
             holder.binding.mobiletv.text=it.phone
-            holder.binding.profileImage.load(it.profileimgurl)
-holder.itemView.setOnClickListener {_->
-user.moveuser(it)
-}
+            holder.itemView.setOnClickListener {_->
+                user.moveuser(it)
+            }
 
 
 
         }
     }
-companion object{
+    companion object{
 
 
-    var comparator = object :DiffUtil.ItemCallback<User>(){
-        override fun areItemsTheSame(
-            oldItem: User,
-            newItem: User
-        ): Boolean {
-            return oldItem.email==newItem.email
+        var comparator = object :DiffUtil.ItemCallback<User>(){
+            override fun areItemsTheSame(
+                oldItem: User,
+                newItem: User
+            ): Boolean {
+                return oldItem.email==newItem.email
+            }
+
+            override fun areContentsTheSame(
+                oldItem: User,
+                newItem: User
+            ): Boolean {
+                return oldItem==newItem
+            }
+
         }
-
-        override fun areContentsTheSame(
-            oldItem: User,
-            newItem: User
-        ): Boolean {
-           return oldItem==newItem
-        }
-
     }
-}
 
 
 

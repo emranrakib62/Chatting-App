@@ -15,10 +15,10 @@ import com.google.firebase.database.ValueEventListener
 
 
 class HomeFragment : Fragment(), UserAdapter.UserListaner {
-lateinit var binding: FragmentHomeBinding
-lateinit var mAuth: FirebaseAuth
-var userlist=mutableListOf<User>()
-lateinit var  adapter: UserAdapter
+    lateinit var binding: FragmentHomeBinding
+    lateinit var mAuth: FirebaseAuth
+    var userlist=mutableListOf<User>()
+    lateinit var  adapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +40,15 @@ lateinit var  adapter: UserAdapter
         super.onViewCreated(view, savedInstanceState)
         FirebaseDatabase.getInstance().reference.child("user").addValueEventListener(object  : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                 userlist.clear()
+                userlist.clear()
                 snapshot.children.forEach {
                     var user:User = it.getValue(User::class.java)!!
-                     userlist.add(user)
+                    userlist.add(user)
 
 
                 }
-               adapter.submitList(userlist)
-              binding.userRecycler.adapter=adapter
+                adapter.submitList(userlist)
+                binding.userRecycler.adapter=adapter
 
             }
 
@@ -75,6 +75,5 @@ lateinit var  adapter: UserAdapter
 
 
 }
-
 
 

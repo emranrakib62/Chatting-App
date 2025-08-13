@@ -62,38 +62,38 @@ class RegisterFragment : Fragment() {
     private fun registerUser(email: String, password: String, name: String, phone: String, address: String) {
 
         mAuth.createUserWithEmailAndPassword(email,password)
-    .addOnCompleteListener{
-       if(it.isSuccessful){
-           firebaseUser= FirebaseAuth.getInstance().currentUser!!
-           userId=firebaseUser.uid
-           val map=mapOf(
-               "name" to name,
-               "email" to email,
-               "phone" to phone,
-               "password" to password,
-               "address" to address,
-               "userId" to firebaseUser.uid,
-               "profileimgurl" to "img"
+            .addOnCompleteListener{
+                if(it.isSuccessful){
+                    firebaseUser= FirebaseAuth.getInstance().currentUser!!
+                    userId=firebaseUser.uid
+                    val map=mapOf(
+                        "name" to name,
+                        "email" to email,
+                        "phone" to phone,
+                        "password" to password,
+                        "address" to address,
+                        "userId" to firebaseUser.uid,
+                        "profileimgurl" to "img"
 
 
-           )
+                    )
 
 
-           if(userId!=null){
-               myRef.child("user").child(userId).setValue(map).addOnCompleteListener {
+                    if(userId!=null){
+                        myRef.child("user").child(userId).setValue(map).addOnCompleteListener {
 
-            if(it.isSuccessful){
-           findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                            if(it.isSuccessful){
+                                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
 
-            }else{
-           Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
-       }
-    }
-           }
-       }else{
-           Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
-       }
-    }
+                            }else{
+                                Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                }else{
+                    Toast.makeText(requireContext(),"${it.exception?.message}", Toast.LENGTH_LONG).show()
+                }
+            }
 
     }
 }

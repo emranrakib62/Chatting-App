@@ -13,16 +13,13 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import coil3.load
+import coil.load
+
 import com.example.chatapp.databinding.FragmentProfileBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.Firebase
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -38,10 +35,10 @@ import java.util.jar.Manifest
 
 class ProfileFragment : Fragment() {
 
-lateinit var firebaseDatabaseReference: DatabaseReference
+    lateinit var firebaseDatabaseReference: DatabaseReference
     lateinit var binding: FragmentProfileBinding
-lateinit var firebaseStorage: StorageReference
-lateinit var user: User
+    lateinit var firebaseStorage: StorageReference
+    lateinit var user: User
 
 
     private lateinit var fileUri: Uri
@@ -52,7 +49,7 @@ lateinit var user: User
 
             if (resultCode == Activity.RESULT_OK) {
 
-                 fileUri = data?.data!!
+                fileUri = data?.data!!
 
                 binding.profileImage.setImageURI(fileUri)
                 binding.imagepicker.text=UPLOAD
@@ -77,40 +74,31 @@ lateinit var user: User
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+
         firebaseStorage= FirebaseStorage.getInstance().getReference("Upload")
-        val database= Firebase.database
-        firebaseDatabaseReference = database.reference.child("User").child(user.userId)
 
-firebaseDatabaseReference.addValueEventListener(object : ValueEventListener{
-    override fun onDataChange(snapshot: DataSnapshot) {
-        TODO("Not yet implemented")
-    }
 
-    override fun onCancelled(error: DatabaseError) {
-        TODO("Not yet implemented")
-    }
-
-})
         user = requireArguments().getParcelable<User>("email")!!
 
 
 
         binding.nametv.text = user.email
         binding.mobiletv.text=user.phone
-       binding.imagepicker.setOnClickListener {
+        binding.imagepicker.setOnClickListener {
 
-           if(binding.imagepicker.text==UPLOAD)
-           {
+            if(binding.imagepicker.text==UPLOAD)
+            {
 
-               startImageUpload()
+                startImageUpload()
 
-           }else{
-               requestPermissions()
-           }
+            }else{
+                requestPermissions()
+            }
 
 
 
-}
+        }
 
 
         return binding.root
@@ -118,32 +106,31 @@ firebaseDatabaseReference.addValueEventListener(object : ValueEventListener{
 
 
     private fun startImageUpload() {
-var storageReference: StorageReference=firebaseStorage.child("Profile").child("profile-img.${user.userId}")
-storageReference.putFile(fileUri).addOnCompleteListener {task ->
-    if(task.isSuccessful){
-        storageReference.downloadUrl.addOnSuccessListener {
+        var storageReference: StorageReference=firebaseStorage.child("Profile").child("profile-img.${user.userId}")
+        storageReference.putFile(fileUri).addOnCompleteListener {task ->
+            if(task.isSuccessful){
+                storageReference.downloadUrl.addOnSuccessListener {
 
-var url: String =it.toString()
+                    var url: String =it.toString()
 
-            val map=mapOf(
-
-
-                "profileimgurl" to url
+                    val map=mapOf(
 
 
-            )
+                        "profileimgurl" to url
 
 
+                    )
+                    val database= Firebase.database
+                    firebaseDatabaseReference = database.reference.child("User").child(user.userId)
+                    firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
+                        Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
-            firebaseDatabaseReference.updateChildren(map).addOnSuccessListener {profileUrl ->
-            Toast.makeText(requireContext(),"profile image uploaded", Toast.LENGTH_LONG).show()
 
-
-            binding.profileImage.load(profileUrl)
+                        binding.profileImage.load(profileUrl)
+                    }
+                }
+            }
         }
-        }
-    }
-}
 
 
     }
@@ -163,7 +150,7 @@ var url: String =it.toString()
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
 
-            )
+                )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
                     // this method is called when all permissions are granted
@@ -208,5 +195,4 @@ var url: String =it.toString()
     }
 
 }
-
 
